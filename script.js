@@ -98,7 +98,7 @@ const renderSongs = () => {
     )
     .join("");
 
-  // Add event listeners for play & delete - getting the index of which track user clicks on
+  // Add event listeners for play & delete. For every song in the playlist, set it so that when clicked the player will play *that exact song* by sending its position (index) to playSong()
   document.querySelectorAll(".playlist-song-info").forEach((button, idx) => {
     button.onclick = () => playSong(idx);
   });
