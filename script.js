@@ -103,20 +103,6 @@ const renderSongs = () => {
     button.onclick = () => playSong(idx);
   });
 
-  document.querySelectorAll(".playlist-song-delete").forEach((button, idx) => {
-    button.onclick = (e) => {
-      e.stopPropagation();
-      allSongs.splice(idx, 1);
-      renderSongs();
-      if (idx === currentIndex) {
-        audio.pause();
-        playerSongTitle.textContent = "";
-        playerSongArtist.textContent = "";
-      }
-    };
-  });
-};
-
 // Play a song by index
 const playSong = (index) => {
   currentIndex = index;
@@ -132,6 +118,21 @@ const updatePlayingClass = () => {
   document.querySelectorAll(".playlist-song").forEach((li, idx) => {
     if (idx === currentIndex) li.setAttribute("aria-current", "true");
     else li.removeAttribute("aria-current");
+  });
+};
+
+// Click delete → remove song from the list, redraw playlist, and stop it if it was playing
+  document.querySelectorAll(".playlist-song-delete").forEach((button, idx) => {
+    button.onclick = (e) => {
+      e.stopPropagation();
+      allSongs.splice(idx, 1);
+      renderSongs();
+      if (idx === currentIndex) {
+        audio.pause();
+        playerSongTitle.textContent = "";
+        playerSongArtist.textContent = "";
+      }
+    };
   });
 };
 
