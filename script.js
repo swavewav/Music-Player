@@ -98,7 +98,7 @@ const renderSongs = () => {
     )
     .join("");
 
-  // Add event listeners for play & delete
+  // Add event listeners for play & delete - getting the index of which track user clicks on
   document.querySelectorAll(".playlist-song-info").forEach((button, idx) => {
     button.onclick = () => playSong(idx);
   });
@@ -124,10 +124,10 @@ const playSong = (index) => {
   audio.play();
   playerSongTitle.textContent = allSongs[currentIndex].title;
   playerSongArtist.textContent = allSongs[currentIndex].artist;
-  updatePlayingClass();
+  updatePlayingClass(); //highlught currrently playing song
 };
 
-// Update currently playing class in playlist
+// Update currently playing class in playlist - highlight currently playing song
 const updatePlayingClass = () => {
   document.querySelectorAll(".playlist-song").forEach((li, idx) => {
     if (idx === currentIndex) li.setAttribute("aria-current", "true");
@@ -136,8 +136,8 @@ const updatePlayingClass = () => {
 };
 
 // Control buttons
-playButton.onclick = () => audio.play();
-pauseButton.onclick = () => audio.pause();
+playButton.onclick = () => audio.play(); //built-in browser method to start playback
+pauseButton.onclick = () => audio.pause(); //built-in browser method to pause playback
 nextButton.onclick = () => {
   currentIndex = (currentIndex + 1) % allSongs.length;
   playSong(currentIndex);
